@@ -1,25 +1,50 @@
 <!DOCTYPE html>
     <html>
         <title>User Sign-Up</title>
+        <head>
+                <style>
+                        .error {
+                            color: red;
+                        }
+                </style>
+                </head>
+                
         <body>
             <h1>User Sign-Up</h1>
                 <form method = "POST">
 
-                    Username:<br>
-                    <input type="text" name="username"><br>
-                    Password:<br>
-                    <input type="text" name="password"><br>
-                    Retype Password:<br>
-                    <input type="text" name="retyped_password"><br>  
-                    Email:<br>
-                    <input type="text" name="email"><br>
-                    <br>
-                    <input type="submit">
-                    <br>
-                    <input type ="reset">
-                    
-                    {% extends "base.html" %}
-
+                        <table>
+                                <tr>
+                                    <td><label for="username">Username</label></td>
+                                    <td>
+                                        <input name="username" type="text" value="">
+                                        <span class="error"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="password">Password</label></td>
+                                    <td>
+                                        <input name="password" type="password">
+                                        <span class="error"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="verify_password">Verify Password</label></td>
+                                    <td>
+                                        <input name="verify_password" type="password">
+                                        <span class="error"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label for="email">Email (optional)</label></td>
+                                    <td>
+                                        <input name="email" value="">
+                                        <span class="error"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="submit">
+                 
                 
 
 

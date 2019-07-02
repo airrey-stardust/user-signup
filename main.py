@@ -18,9 +18,9 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 
-#@app.route('/', methods=['POST', 'GET'])
-
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
+### OR? #####
+#@app.route('/')
 
 
 def index():
@@ -29,7 +29,7 @@ def index():
         
     username = ""
     email = ""
-    password =""
+    password = ""
     verify_password = ""
     error_username = ""
     error_password = ""
@@ -59,58 +59,59 @@ def index():
 
 ######### PAsSWORD #####
             
-            password = request.form['password']
+        password = request.form['password']
             
-            if password == "":
+        if password == "":
                 error_password = "The password can not be blank."
 
-            for i in password:
+        for i in password:
                 
-                if i.isspace():
-                    error_password = "Passwords can not have spaces."
+            if i.isspace():
+                error_password = "Passwords can not have spaces."
             
-            if (len(password) < 3) or (len(password) > 20):
-                error_password = "Passowrds must be between 3 and 20 characters long."
+        if (len(password) < 3) or (len(password) > 20):
+            error_password = "Passowrds must be between 3 and 20 characters long."
 
                 
 
 #####   PASSWORD VERIFICATION ####
     
-            verify_password = request.form['verify_password']
+        verify_password = request.form['verify_password']
            
-            if verify_password == "":
-                error_password_verification = "The password verification can not be blank."
+        if verify_password == "":
+            error_password_verification = "The password verification can not be blank."
             #redundant because of password = verification password in prev step?
 
-            for i in verify_password:
+        for i in verify_password:
 
-                if i.isspace():
-                    error_password = "Passwords may not contain spaces"
+            if i.isspace():
+                error_password = "Passwords may not contain spaces"
 
-            if password != verify_password:
-                error_password_verification = "The passwords do not match."
+        if password != verify_password:
+            error_password_verification = "The passwords must match. Please verify the passwords."
 
-####      EMAIL    ######
-        
-            email = request.form['email']
+##########      EMAIL    ######
+    
+        email = request.form['email']
+            
         #email addresses can only contain letters, ., numbers, @
         #must contain @ and ., only one @?
         #make allowed character set? no {}[]? make a list?
-        #what do most valid email logins have?
         #email address may be blank
 
             #if email.count('@') != 1:
-                #error_email_message = "The email address must contain one @."
+                #error_email_message = "The email address must contain only one @."
          
-            if (len(email) < 3) or (len(email) > 20):
-                error_email_message = "Email addresses must be between 3 and 20 characters long and contain an @."
+        if (len(email) < 3) or (len(email) > 20):
+            error_email_message = "Email addresses must be between 3 and 20 characters long and contain an @."
 
-            for i in email:
+        for i in email:
 
-                if i.isspace():
-                    error_email_message = "The email address can not contain a space."
+            if i.isspace():
+                error_email_message = "The email address can not contain a space."
                 
                 
+    ############# END TEXT VALIDATION #######           
                 
 
     if not error_username and not error_password and not error_password_verification and not error_email_message:   

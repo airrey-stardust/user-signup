@@ -3,8 +3,8 @@
 
 
 ######  To Do   #####
-# 1. error when fields left blank
-# 2. error when invalid characters
+# 1. error when fields left blank, except email
+# 2. error when invalid characters - what email addresses can contain
 # 3. character limits
 
 
@@ -18,9 +18,9 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 
-@app.route('/', methods=['POST', 'GET'])
+#@app.route('/', methods=['POST', 'GET'])
 
-#@app.route('/index')
+@app.route('/')
 
 
 def index():
@@ -36,10 +36,12 @@ def index():
     error_password_verification = ""
     error_email_message = ""
 
+    ######
+
     if request.method == 'POST':
 
-#### USERNAME #####
-    # add character limit?
+######## USERNAME #####
+    
         username = request.form['username']
 
         if username == "":
@@ -76,7 +78,7 @@ def index():
     
             verify_password = request.form['verify_password']
            
-            if verify_password = "":
+            if verify_password == "":
                 error_password_verification = "The password verification can not be blank."
             #redundant because of password = verification password in prev step?
 
@@ -91,6 +93,7 @@ def index():
 ####      EMAIL    ######
         
             email = request.form['email']
+        #email addresses can only contain letters, ., numbers, @
         #must contain @ and ., only one @?
         #make allowed character set? no {}[]? make a list?
         #what do most valid email logins have?

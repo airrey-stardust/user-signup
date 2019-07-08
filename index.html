@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
     <html>
         <title>User Sign-Up</title>
         
@@ -14,27 +16,25 @@
                 <form method = "POST">
 
                         <form>
-                            <label for="username">Username</label>
-                                    
-                            <input name="username" type="text" value="">
-                            <span class="error"></span>
-                                
-                            <label for="password">Password</label>
-                                    
-                            <input name="password" type="text">
-                            <span class="error"></span>
-                                   
-                            <label for="verify_password">Verify Password</label>
-                                    
-                            <input name="verify_password" type="text">
-                            <span class="error"></span>
-                                  
-                            <label for="email">Email (optional)</label>
-                                    
-                            <input name="email" type="text" value="">
-                            <span class="error"></span>
-                                   
-                            <input type="submit">
+                            <label><span class="form_label">Username:</span>
+                                <input name="username" type="text" value='{{username}}' />
+                            </label>
+                            <p class="error">{{error_username}} &nbsp;</p>
+                            <label><span class="form_label">Password:</span>
+                                <input name="password" type="password" value='{{password}}' />
+                            </label>
+                            <p class="error">{{error_password}} &nbsp;</p>
+                            <label><span class="form_label">
+                            Verify Password:
+                            </span>
+                                <input name="verify_password" type="password" value='{{verify_password}}' />
+                            </label>
+                            <p class="error">{{error_password_verification}} &nbsp;</p>
+                            <label><span class="form_label">E-mail (optional):</span>
+                                <input name="email" type="text" value='{{email}}' />
+                            </label>
+                            <p class="error">{{error_email_message}} &nbsp;</p>
+                            <input class="submit" type="submit" value="Submit" />
                         </form>
         </body>
     </html>

@@ -10,7 +10,7 @@
 
 # DO NOT FORGET TO ACTIVATE FLASK IN GIT WHEN RUNNING - source activate flask-env ######
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import jinja2
 
 
@@ -43,6 +43,9 @@ def index():
 ######## USERNAME #####
     
         username = request.form['username']
+        password = request.form['password']
+        verify_password = request.form['verify_password']
+        email = request.form['email']
 
         if username == "":
             error_username = "The username can not be blank."
@@ -59,7 +62,7 @@ def index():
 
 ######### PAsSWORD #####
             
-        password = request.form['password']
+   
             
         if password == "":
                 error_password = "The password can not be blank."
@@ -76,7 +79,7 @@ def index():
 
 #####   PASSWORD VERIFICATION ####
     
-        verify_password = request.form['verify_password']
+        
            
         if verify_password == "":
             error_password_verification = "The password verification can not be blank."
@@ -88,11 +91,11 @@ def index():
                 error_password = "Passwords may not contain spaces"
 
         if password != verify_password:
-            error_password_verification = "The passwords must match. Please verify the passwords."
+            error_password_verification = "The passwords must match. Please verify the passwords.+"
 
 ##########      EMAIL    ######
     
-        email = request.form['email']
+       
             
         #email addresses can only contain letters, ., numbers, @
         #must contain @ and ., only one @?
@@ -111,17 +114,21 @@ def index():
                 error_email_message = "The email address can not contain a space."
                 
                 
-    ############# END TEXT VALIDATION #######           
+############# END TEXT VALIDATION #######           
                 
-
-    if not error_username and not error_password and not error_password_verification and not error_email_message:   
+    #### this needs to be changed, use Jinja to render the template####
+        if not error_username and not error_password and not error_password_verification and not error_email_message:   
         
-        return render_template('index.html', username=username, password=password, email=email, verify_password=verify_password, error_email_message=error_email_message, error_password=error_password, error_username=error_username, error_password_verification=error_password_verification)
+            return redirect('/hello_user?username={0}'.format(username))
+        else:
+    #### this is good #####
+            return render_template('index.html', username=username, password=password, email=email, verify_password=verify_password, error_email_message=error_email_message, error_password=error_password, error_username=error_username, error_password_verification=error_password_verification)
     
-    
+@app.route('/welcome')
+### only shows error messages if there is errors in the html form, use jinja ####
+
+def signup_completion():
+    username = request.args.get('username')
     return render_template('hello_user.html', username=username)
-    
-
-
 
 app.run()

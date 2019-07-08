@@ -6,35 +6,33 @@
                 <form method = "POST">
 
                         <form>
-                            <label><span class="form_label">Username:</span>
-                            <input name="username" type="text" value='{{username}}'/>
+                            <label>Username:
+                            <input name="username" type="text" value='{{username}}'>
                             </label>
-                            <p class="error">{{error_username}}</p>
+                            <p class="error">{{error_username}}</p>                       
                             
-                            <label><span class="form_label">
-                            Password:</span>
+                            <label>
+                            Password:
 
-                            <input name="password" type="text" value='{{password}}'/>
+                            <input name="password" type="text" value='{{password}}'>
                             </label>
                             <p class="error">{{error_password}}</p>
 
-                            <label><span class="form_label">
+                            <label>
                             Verify Password:
-                            </span>
-                            <input name="verify_password" type="text" value='{{verify_password}}'/>
+                            
+                            <input name="verify_password" type="text" value='{{verify_password}}'>
                             </label>
                             <p class="error">{{error_password_verification}}</p>
 
-                            <label><span class="form_label">E-mail (optional):</span>
-                            <input name="email" type="text" value='{{email}}'/>
+                            <label>E-mail (optional):
+                            <input name="email" type="text" value='{{email}}'>
                             </label>
                             <p class="error">{{error_email_message}}</p>
 
-                            <input class="submit" type="submit" value="Submit"/>
-
+                            <input class="submit" type="submit" value="Submit">
+                       
                         </form>
-                {% if error %}
-                    <p class="error">{{error}}>
-                {% endif %}         
+                
                 
     {% endblock %}

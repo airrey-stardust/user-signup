@@ -11,7 +11,8 @@
 # DO NOT FORGET TO ACTIVATE FLASK IN GIT WHEN RUNNING - source activate flask-env ######
 
 from flask import Flask, render_template, request, redirect
-import jinja2
+
+
 
 
 app = Flask(__name__)
@@ -24,7 +25,7 @@ app.config['DEBUG'] = True
 def home():
     return render_template('index.html')
 
-@app.route("/index", methods=['POST'])
+
 def index():
     
     username = ''
@@ -48,13 +49,12 @@ def index():
 
     if username == '':
         error_username = "The username can not be blank."
-
+    if (len(username) < 3) or (len(username) > 20):
+        error_username = "Usernames must be between 3 and 20 characters long."
     for i in username:
         if i.isspace():
             error_username = "Spaces are not allowed in the username."
         
-    if (len(username) < 3) or (len(username) > 20):
-        error_username = "Usernames must be between 3 and 20 characters long."
 
 ######### PAsSWORD #####
             
@@ -112,17 +112,16 @@ def index():
 ############# END TEXT VALIDATION #######           
                 
     #### this needs to be changed, use Jinja to render the template####
-    if not error_username and not error_password and not error_password_verification and not error_email_message:   
-        return redirect('/hello_user?username={0}'.format(username))
+    if (error_username == '' and error_email_message == '' and error_password == '' and error_password_verification == ''):
+        return render_template('hello_user.html' username=username)
+
     else:
     #### this is good #####
         return render_template('index.html', username=username, password=password, email=email, verify_password=verify_password, error_email_message=error_email_message, error_password=error_password, error_username=error_username, error_password_verification=error_password_verification)
     
-@app.route('/hello_user')
+
 ### only shows error messages if there is errors in the html form, use jinja ####
 
-def hell0_user():
-    username = request.args.get('username')
-    return render_template('hello_user.html', username=username)
+
 
 app.run()

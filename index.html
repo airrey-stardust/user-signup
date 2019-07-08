@@ -1,41 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <html>
-        <title>User Sign-Up</title>
-        
-                <style>
-                        .error {
-                            color: red;
-                        }
-                </style>
-                
-                
-        <body>
-            <h1>User Sign-Up</h1>
+
+    <h1>User Sign-Up</h1>
                 <form method = "POST">
 
                         <form>
                             <label><span class="form_label">Username:</span>
-                                <input name="username" type="text" value='{{username}}' />
+                            <input name="username" type="text" value='{{username}}'/>
                             </label>
-                            <p class="error">{{error_username}} &nbsp;</p>
-                            <label><span class="form_label">Password:</span>
-                                <input name="password" type="password" value='{{password}}' />
+                            <p class="error">{{error_username}}</p>
+                            
+                            <label><span class="form_label">
+                            Password:</span>
+
+                            <input name="password" type="text" value='{{password}}'/>
                             </label>
-                            <p class="error">{{error_password}} &nbsp;</p>
+                            <p class="error">{{error_password}}</p>
+
                             <label><span class="form_label">
                             Verify Password:
                             </span>
-                                <input name="verify_password" type="password" value='{{verify_password}}' />
+                            <input name="verify_password" type="text" value='{{verify_password}}'/>
                             </label>
-                            <p class="error">{{error_password_verification}} &nbsp;</p>
-                            <label><span class="form_label">E-mail (optional):</span>
-                                <input name="email" type="text" value='{{email}}' />
-                            </label>
-                            <p class="error">{{error_email_message}} &nbsp;</p>
-                            <input class="submit" type="submit" value="Submit" />
-                        </form>
-        </body>
-    </html>
+                            <p class="error">{{error_password_verification}}</p>
 
+                            <label><span class="form_label">E-mail (optional):</span>
+                            <input name="email" type="text" value='{{email}}'/>
+                            </label>
+                            <p class="error">{{error_email_message}}</p>
+
+                            <input class="submit" type="submit" value="Submit"/>
+
+                        </form>
+                {% if error %}
+                    <p class="error">{{error}}>
+                {% endif %}         
+                
+    {% endblock %}

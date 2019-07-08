@@ -17,81 +17,76 @@ import jinja2
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-
-@app.route('/', methods=['POST', 'GET'])
+@app.route("/", methods=['POST', 'GET'])
 ### OR? #####
 #@app.route('/')
 
+def home():
+    return render_template('index.html')
 
+@app.route("/index", methods=['POST'])
 def index():
+    
+    username = ''
+    email = ''
+    password = ''
+    verify_password = ''
+    error_username = ''
+    error_password = ''
+    error_password_verification = ''
+    error_email_message = ''
+    
 
     #variable names and error messages
-        
-    username = ""
-    email = ""
-    password = ""
-    verify_password = ""
-    error_username = ""
-    error_password = ""
-    error_password_verification = ""
-    error_email_message = ""
 
-    ######
-
-    if request.method == 'POST':
-
-######## USERNAME #####
     
-        username = request.form['username']
-        password = request.form['password']
-        verify_password = request.form['verify_password']
-        email = request.form['email']
+######## USERNAME #####
+    username = request.form['username']
+    password = request.form['password']
+    verify_password = request.form['verify_password']
+    email = request.form['email']
 
-        if username == "":
-            error_username = "The username can not be blank."
+    if username == '':
+        error_username = "The username can not be blank."
 
-        for i in username:
-
-            if i.isspace():
-               
-                error_username = "Spaces are not allowed in the username."
+    for i in username:
+        if i.isspace():
+            error_username = "Spaces are not allowed in the username."
         
-        if (len(username) < 3) or (len(username) > 20):
-            error_username = "Usernames must be between 3 and 20 characters long."
-
+    if (len(username) < 3) or (len(username) > 20):
+        error_username = "Usernames must be between 3 and 20 characters long."
 
 ######### PAsSWORD #####
             
    
             
-        if password == "":
-                error_password = "The password can not be blank."
+    if password == '':
+        error_password = "The password can not be blank."
 
-        for i in password:
+    for i in password:
                 
-            if i.isspace():
-                error_password = "Passwords can not have spaces."
+        if i.isspace():
+            error_password = "Passwords can not have spaces."
             
-        if (len(password) < 3) or (len(password) > 20):
-            error_password = "Passowrds must be between 3 and 20 characters long."
+    if (len(password) < 3) or (len(password) > 20):
+         error_password = "Passowrds must be between 3 and 20 characters long."
 
                 
 
 #####   PASSWORD VERIFICATION ####
     
         
-           
-        if verify_password == "":
-            error_password_verification = "The password verification can not be blank."
+         
+    if verify_password == "":
+        error_password_verification = "The password verification can not be blank."
             #redundant because of password = verification password in prev step?
 
-        for i in verify_password:
+    for i in verify_password:
+        if i.isspace():
+            error_password = "Passwords may not contain spaces"
 
-            if i.isspace():
-                error_password = "Passwords may not contain spaces"
-
-        if password != verify_password:
-            error_password_verification = "The passwords must match. Please verify the passwords.+"
+    if password != verify_password:
+        error_password_verification = "The passwords must match. Please verify the passwords.+"
 
 ##########      EMAIL    ######
     
@@ -104,30 +99,29 @@ def index():
 
             #if email.count('@') != 1:
                 #error_email_message = "The email address must contain only one @."
-         
-        if (len(email) < 3) or (len(email) > 20):
-            error_email_message = "Email addresses must be between 3 and 20 characters long and contain an @."
 
-        for i in email:
+        
+    if (len(email) < 3) or (len(email) > 20):
+        error_email_message = "Email addresses must be between 3 and 20 characters long and contain an @."
 
-            if i.isspace():
-                error_email_message = "The email address can not contain a space."
+    for i in email:
+        if i.isspace():
+            error_email_message = "The email address can not contain a space."
                 
                 
 ############# END TEXT VALIDATION #######           
                 
     #### this needs to be changed, use Jinja to render the template####
-        if not error_username and not error_password and not error_password_verification and not error_email_message:   
-        
-            return redirect('/hello_user?username={0}'.format(username))
-        else:
+    if not error_username and not error_password and not error_password_verification and not error_email_message:   
+        return redirect('/hello_user?username={0}'.format(username))
+    else:
     #### this is good #####
-            return render_template('index.html', username=username, password=password, email=email, verify_password=verify_password, error_email_message=error_email_message, error_password=error_password, error_username=error_username, error_password_verification=error_password_verification)
+        return render_template('index.html', username=username, password=password, email=email, verify_password=verify_password, error_email_message=error_email_message, error_password=error_password, error_username=error_username, error_password_verification=error_password_verification)
     
-@app.route('/welcome')
+@app.route('/hello_user')
 ### only shows error messages if there is errors in the html form, use jinja ####
 
-def signup_completion():
+def hell0_user():
     username = request.args.get('username')
     return render_template('hello_user.html', username=username)
 

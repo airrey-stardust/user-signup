@@ -6,29 +6,29 @@
                 <form method = "POST">
 
                         <form>
-                            <label>Username:
-                            <input name="username" type="text">
+                            <label for ="username">Username:
+                            <input name="username" type="text" value="{{  username }}">
                             </label>
-                            <span class="error">{{error_username}}</span>                       
+                            <span class="error">{{ error_username }}</span>                       
                             
-                            <label>
+                            <label for ="password">
                             Password:
 
                             <input name="password" type="text">
                             </label>
-                            <span class="error">{{error_password}}</span>
+                            <span class="error">{{ error_password }}</span>
 
-                            <label>
+                            <label for="verify_password">
                             Verify Password:
                             
                             <input name="verify_password" type="text">
                             </label>
-                            <span class="error">{{error_password_verification}}</span>
+                            <span class="error">{{ error_password_verification }}</span>
 
-                            <label>E-mail (optional):
+                            <label for ="email">E-mail (optional):
                             <input name="email" type="text">
                             </label>
-                            <span class="error">{{error_email_message}}</span>
+                            <span class="error">{{ error_email_message }}</span>
 
                             <input class="submit" type="submit" value="Submit">
                        

@@ -25,9 +25,17 @@ app.config['DEBUG'] = True
 def home():
     return render_template('index.html')
 
-
+@app.route("/index", methods=['POST', 'GET'])
 def index():
     
+
+    
+######## USERNAME #####
+    username = request.form['username']
+    password = request.form['password']
+    verify_password = request.form['verify_password']
+    email = request.form['email']
+
     username = ''
     email = ''
     password = ''
@@ -37,15 +45,6 @@ def index():
     error_password_verification = ''
     error_email_message = ''
     
-
-    #variable names and error messages
-
-    
-######## USERNAME #####
-    username = request.form['username']
-    password = request.form['password']
-    verify_password = request.form['verify_password']
-    email = request.form['email']
 
     if username == '':
         error_username = "The username can not be blank."
@@ -113,15 +112,17 @@ def index():
                 
     #### this needs to be changed, use Jinja to render the template####
     if (error_username == '' and error_email_message == '' and error_password == '' and error_password_verification == ''):
-        return render_template('hello_user.html' username=username)
+        return redirect('home')
 
     else:
     #### this is good #####
-        return render_template('index.html', username=username, password=password, email=email, verify_password=verify_password, error_email_message=error_email_message, error_password=error_password, error_username=error_username, error_password_verification=error_password_verification)
-    
+        return render_template('index.html', error_email_message=error_email_message, error_password=error_password, error_password_verification=error_password_verification, error_username=error_username)
 
 ### only shows error messages if there is errors in the html form, use jinja ####
 
-
+@app.route("/hello_user")
+def hello_user():
+    user = request.args.get('username')
+    return render_template('hello_user.html')
 
 app.run()

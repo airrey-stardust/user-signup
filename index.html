@@ -1,38 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1>User SignUp</h1>
+<form action='' method='POST'>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="username">Username</label>
+                </td>
+                <td>
+                    <input name="username" type="text" value="{{ username }}">
+                    <span class="error">{{ error_username }}</span>
+                </td>
+            </tr>
 
-    <h1>User Sign-Up</h1>
-                <form method = "POST">
+            <tr>
+                <td>
+                    <label for="password">Password</label>
+                </td>
+                <td>
+                    <input name="password" type="text">
+                    <span class="error">{{ error_password }}</span>
+                </td>
+            </tr>
 
-                        <form>
-                            <label for ="username">Username:
-                            <input name="username" type="text" value="{{  username }}">
-                            </label>
-                            <span class="error">{{ error_username }}</span>                       
-                            
-                            <label for ="password">
-                            Password:
+            <tr>
+                <td>
+                    <label for="verify_password">Verify Password</label>
+                </td>
+                <td>
+                    <input name="verify_password" type="text">
+                    <span class="error">{{ error_password_verification }}</span>
+                </td>
+            </tr>
 
-                            <input name="password" type="text">
-                            </label>
-                            <span class="error">{{ error_password }}</span>
+            <tr>
+                <td>
+                    <label for="email">Email (optional)</label>
+                </td>
+                <td>
+                    <input name="email" type="text" value="{{ email }}">
+                    <span class="error">{{ error_email_message }}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-                            <label for="verify_password">
-                            Verify Password:
-                            
-                            <input name="verify_password" type="text">
-                            </label>
-                            <span class="error">{{ error_password_verification }}</span>
-
-                            <label for ="email">E-mail (optional):
-                            <input name="email" type="text">
-                            </label>
-                            <span class="error">{{ error_email_message }}</span>
-
-                            <input class="submit" type="submit" value="Submit">
-                       
-                        </form>
-                
-                
-    {% endblock %}
+    <input type="submit" value="Submit">
+</form>
+                        
+                        
+                        
+{% endblock %}
